@@ -47,29 +47,4 @@ class ClientPolicy
         return $authUser->can('restore_client');
     }
 
-    public function forceDelete(AuthUser $authUser, Client $client): bool
-    {
-        return $authUser->can('force_delete_client');
-    }
-
-    public function forceDeleteAny(AuthUser $authUser): bool
-    {
-        return $authUser->can('force_delete_any_client');
-    }
-
-    public function restoreAny(AuthUser $authUser): bool
-    {
-        return $authUser->can('restore_any_client');
-    }
-
-    public function replicate(AuthUser $authUser, Client $client): bool
-    {
-        return $authUser->can('replicate_client');
-    }
-
-    public function reorder(AuthUser $authUser): bool
-    {
-        return $authUser->can('reorder_client');
-    }
-
 }
