@@ -17,14 +17,21 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Override;
 
 class InvoiceResource extends Resource
 {
     protected static ?string $model = Invoice::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocument;
 
     protected static ?string $recordTitleAttribute = 'invoice_number';
+
+    #[Override]
+    public static function getModelLabel(): string
+    {
+        return __('invoice.invoice');
+    }
 
     public static function form(Schema $schema): Schema
     {

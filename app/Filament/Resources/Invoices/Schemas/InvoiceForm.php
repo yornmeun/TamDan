@@ -24,6 +24,11 @@ class InvoiceForm
                             ->required(),
 
                         TextInput::make('invoice_number')
+                            ->default(function(){
+                                $invoiceNumber = generateNumber('INV', auth()->user(), 'invoices');
+                                return $invoiceNumber;
+                            })
+                            ->disabled()
                             ->label(__('invoice.invoice_number'))
                             ->required(),
 
@@ -41,9 +46,14 @@ class InvoiceForm
                             ->label(__('invoice.due_amount'))
                             ->numeric()
                             ->required(),
-
-                        TextInput::make('status')
+                        Select::make('status')
                             ->label(__('invoice.status'))
+                            ->options([
+                                'draft' => __('invoice.status_draft'),
+                                'sent' => __('invoice.status_sent'),
+                                'paid' => __('invoice.status_paid'),
+                                'overdue' => __('invoice.status_overdue'),
+                            ])
                             ->required(),
                     ]),
             ]);

@@ -7,4 +7,7 @@ return [
     'paid_amount' => 'Paid Amount',
     'due_amount' => 'Due Amount',
     'status' => 'Status',
+    'invoice' => 'Invoice',
+    'create_invoice' => 'Create Invoice',
+
 ];
