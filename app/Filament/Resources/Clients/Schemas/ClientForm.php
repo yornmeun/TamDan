@@ -21,8 +21,7 @@ class ClientForm
                             ->required(),
 
                         TextInput::make('company_name')
-                            ->label(__('client.company_name'))
-                            ->required(),
+                            ->label(__('client.company_name')),
 
                         TextInput::make('phone')
                             ->label(__('client.phone'))

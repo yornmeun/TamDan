@@ -22,9 +22,12 @@ class ClientResource extends Resource
 {
     protected static ?string $model = Client::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::UserGroup;
 
-    protected static ?string $recordTitleAttribute = 'client';
+    public static function getModelLabel(): string
+    {
+        return __('client.client');
+    }   
 
     public static function form(Schema $schema): Schema
     {
@@ -55,6 +58,7 @@ class ClientResource extends Resource
             'create' => CreateClient::route('/create'),
             'view' => ViewClient::route('/{record}'),
             'edit' => EditClient::route('/{record}/edit'),
+            'delete' => EditClient::route('/{record}/delete'),
         ];
     }
 
