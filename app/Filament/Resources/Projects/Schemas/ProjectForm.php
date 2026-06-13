@@ -28,21 +28,33 @@ class ProjectForm
                         Select::make('quotation_id')
                             ->label(__('project.quotation'))
                             ->relationship('quotation', 'quote_number')
-                            ->searchable()
                             ->preload(),
 
                         TextInput::make('title')
                             ->label(__('project.title'))
                             ->required(),
 
-                        TextInput::make('status')
+                        Select::make('status')
                             ->label(__('project.status'))
+                            ->options([
+                                'not_started' => __('project.status_not_started'),
+                                'in_progress' => __('project.status_in_progress'),
+                                'completed' => __('project.status_completed'),
+                                'on_hold' => __('project.status_on_hold'),
+                                'cancelled' => __('project.status_cancelled'),
+                            ])
                             ->required(),
 
                         DatePicker::make('start_date')
+                            ->displayFormat('d/mm/Y')
+                            ->native(false)
+                            ->closeOnDateSelection()
                             ->label(__('project.start_date')),
 
                         DatePicker::make('due_date')
+                            ->displayFormat('d/mm/Y')
+                            ->native(false)
+                            ->closeOnDateSelection()
                             ->label(__('project.due_date')),
                     ]),
                 Textarea::make('description')
