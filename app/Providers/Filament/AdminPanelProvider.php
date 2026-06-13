@@ -31,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->font('Battambang')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
+            ->globalSearch(false)
             ->colors([
                 'primary' => Color::Amber,
             ])

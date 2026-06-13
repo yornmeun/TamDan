@@ -15,6 +15,7 @@ class Invoice extends Model
         'paid_amount',
         'due_amount',
         'status',
+        'user_id',
     ];
 
     public function project()

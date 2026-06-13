@@ -6,6 +6,7 @@ use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\Hidden;
 
 class InvoiceForm
 {
@@ -16,6 +17,8 @@ class InvoiceForm
                 Grid::make(2)
                     ->columnSpanFull()
                     ->schema([
+                        Hidden::make('user_id')
+                            ->default(auth()->user()->id),
                         Select::make('project_id')
                             ->label(__('invoice.project'))
                             ->relationship('project', 'title')
@@ -29,6 +32,7 @@ class InvoiceForm
                                 return $invoiceNumber;
                             })
                             ->disabled()
+                            ->dehydrated()
                             ->label(__('invoice.invoice_number'))
                             ->required(),
 
