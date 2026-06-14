@@ -19,7 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
-
+use Filament\Support\Enums\Width;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->brandName('Tamdan-តាមដាន')
+            ->maxContentWidth(Width::Full)
             ->brandLogo(asset('images/tam_dan_logo.png'))
             ->brandLogoHeight('4rem')
             ->path('admin')
