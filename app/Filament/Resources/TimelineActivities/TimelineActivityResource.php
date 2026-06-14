@@ -26,6 +26,9 @@ class TimelineActivityResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'type';
 
+    protected static bool $shouldRegisterNavigation = false;
+
+
     public static function form(Schema $schema): Schema
     {
         return TimelineActivityForm::configure($schema);

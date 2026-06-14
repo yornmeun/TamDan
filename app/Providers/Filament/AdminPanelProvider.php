@@ -27,13 +27,18 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
+            ->brandName('Tamdan-តាមដាន')
+            ->brandLogo(asset('images/tam_dan_logo.png'))
+            ->brandLogoHeight('4rem')
             ->path('admin')
             ->font('Battambang')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->globalSearch(false)
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Sky,
+                // 'primary' => '#0281cc',
+
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->plugins([
