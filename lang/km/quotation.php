@@ -1,10 +1,24 @@
 <?php
 
 return [
-    'quote_number' => 'លេខសម្រង់ថ្លៃ',
+    'quote_number' => 'លេខវិក្កយបត្រតម្លៃបំរុង',
     'client' => 'អតិថិជន',
     'total' => 'សរុប',
     'status' => 'ស្ថានភាព',
-    'issued_at' => 'ដាក់ឱ្យដំណើរការក្នុងថ្ងៃ',
+    'issued_at' => 'ថ្ងៃចេញ',
     'created_at' => 'បង្កើតលើ',
+    'quotation' => 'វិក្កយបត្រតម្លៃបំរុង',
+    'status_draft' => 'សេចក្តីព្រាង',
+    'status_sent' => 'បានផ្ញើ',
+    'status_accepted' => 'បានទទួល',
+    'status_rejected' => 'បានបដិសេធ',
+    'expired_at' => 'ថ្ងៃផុតកំណត់',
+    'create_quotation' => 'បង្កើតវិក្កយបត្រតម្លៃបំរុង',
+    'start_date_from' => 'ថ្ងៃចេញពី',
+    'start_date_to' => ' ដល់ថ្ងៃចេញពី',
+    'quotation_items' => 'មុខទំនិញក្នុងវិក្កយបត្រតម្លៃបំរុង',
+    'name' => 'ឈ្មោះ',
+    'description' => 'ការពិពណ៌នាម',
+    'qty' => 'ចំនួន',
+    'price' => 'តម្លៃ',
 ];

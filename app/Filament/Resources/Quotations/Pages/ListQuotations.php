@@ -13,7 +13,8 @@ class ListQuotations extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+            ->label(__('quotation.create_quotation')),
         ];
     }
 }

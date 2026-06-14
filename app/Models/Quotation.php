@@ -16,6 +16,8 @@ class Quotation extends Model
         'total',
         'status',
         'issued_at',
+        'expired_at',
+        'user_id',
     ];
 
     public function client()
@@ -31,5 +33,10 @@ class Quotation extends Model
     public function projects()
     {
         return $this->hasMany(Project::class);
+    }
+
+    public function quotationItems()
+    {
+        return $this->hasMany(QuotationItem::class);
     }
 }

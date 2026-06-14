@@ -8,6 +8,11 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\DeleteAction;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Enums\FiltersLayout;
+use App\Models\Client;
+use App\Models\TimelineActivity;
 
 class TimelineActivitiesTable
 {
@@ -30,7 +35,18 @@ class TimelineActivitiesTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make(),
             ])
+            ->filters([
+                SelectFilter::make('client_id')
+                    ->label(__('timeline_activity.client'))
+                    ->searchable()
+                    ->preload()
+                    ->options(fn () => Client::pluck('name','id')->toArray()),
+                SelectFilter::make('type')
+                    ->label(__('timeline_activity.type'))
+                    ->options(fn () => TimelineActivity::pluck('type','type')->toArray()),
+            ], layout: FiltersLayout::AboveContent)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

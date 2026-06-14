@@ -34,8 +34,15 @@ class TaskForm
                             ->label(__('task.title'))
                             ->required(),
 
-                        TextInput::make('status')
+                        Select::make('status')
                             ->label(__('task.status'))
+                            ->options([
+                                'not_started' => __('project.status_not_started'),
+                                'in_progress' => __('project.status_in_progress'),
+                                'completed' => __('project.status_completed'),
+                                'on_hold' => __('project.status_on_hold'),
+                                'cancelled' => __('project.status_cancelled'),
+                            ])
                             ->required(),
 
                         DatePicker::make('due_date')

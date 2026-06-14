@@ -8,4 +8,9 @@ use Filament\Resources\Pages\EditRecord;
 class EditQuotation extends EditRecord
 {
     protected static string $resource = QuotationResource::class;
+    
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
