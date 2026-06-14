@@ -6,6 +6,7 @@ use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Hidden;
 
 class ClientForm
 {
@@ -16,6 +17,8 @@ class ClientForm
                 Grid::make(3)
                     ->columnSpanFull()
                     ->schema([
+                        Hidden::make('user_id')
+                            ->default(auth()->id()),
                         TextInput::make('name')
                             ->label(__('client.name'))
                             ->required(),

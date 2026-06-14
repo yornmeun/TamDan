@@ -29,6 +29,20 @@ class InvoicesTable
                     ->sortable(),
                 BadgeColumn::make('status')
                     ->label(__('invoice.status'))
+                    ->color(fn ($state) => match ($state) {
+                        'draft' => 'warning',
+                        'sent' => 'info',
+                        'paid' => 'success',
+                        'overdue' => 'danger',
+                        default => 'gray',
+                    })
+                     ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'draft' => __('quotation.status_draft'),
+                        'sent' => __('invoice.status_sent'),
+                        'paid' => __('invoice.status_paid'),
+                        'overdue' => __('invoice.status_overdue'),
+                        default => $state,
+                    })
                     ->sortable(),
                 TextColumn::make('total')
                     ->label(__('invoice.total'))

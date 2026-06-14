@@ -13,4 +13,7 @@ return [
     'status_sent' => 'បានផ្ញើ',
     'status_paid' => 'បានបង់ប្រាក់',
     'status_overdue' => 'ហួសកាលកំណត់',
+    'invoice_total' => 'វិក័យបត្រទាំងអស់',
+    'invoice_overdue' => 'វិក័យបត្រហួសកាលកំណត់',
+
 ];

@@ -19,4 +19,5 @@ return [
     'status_cancelled' => 'បានបោះបង់',
     'start_date_from' => 'ចាប់ពីថ្ងៃ',
     'start_date_to' => 'ដល់ថ្ងៃ',
+    'project_total' => 'គម្រោងទាំងអស់',
 ];
