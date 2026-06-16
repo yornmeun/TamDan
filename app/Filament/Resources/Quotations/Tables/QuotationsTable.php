@@ -32,7 +32,7 @@ class QuotationsTable
                 BadgeColumn::make('status')
                     ->label(__('quotation.status'))
                     ->color(fn ($state) => match ($state) {
-                          'draft' => 'gray',
+                          'draft' => 'warning',
                             'sent' => 'info',
                             'accepted' => 'success',
                             'rejected' => 'danger',
