@@ -17,6 +17,10 @@ class TaskForm
                 Grid::make(2)
                     ->columnSpanFull()
                     ->schema([
+                        TextInput::make('title')
+                            ->label(__('task.title'))
+                            ->required(),
+
                         Select::make('project_id')
                             ->label(__('task.project'))
                             ->relationship('project', 'title')
@@ -26,26 +30,34 @@ class TaskForm
 
                         Select::make('assigned_to')
                             ->label(__('task.assigned_to'))
-                            ->relationship('assignedTo', 'name')
+                            ->relationship('assignee', 'name')
                             ->searchable()
                             ->preload(),
-
-                        TextInput::make('title')
-                            ->label(__('task.title'))
-                            ->required(),
+                        Select::make('priority')
+                            ->label(__('task.priority'))
+                            ->searchable()
+                            ->preload()
+                            ->options([
+                                'low' => __('task.priority_low'),
+                                'medium' => __('task.priority_medium'),
+                                'high' => __('task.priority_high'),
+                            ]),
 
                         Select::make('status')
                             ->label(__('task.status'))
                             ->options([
-                                'not_started' => __('project.status_not_started'),
-                                'in_progress' => __('project.status_in_progress'),
-                                'completed' => __('project.status_completed'),
-                                'on_hold' => __('project.status_on_hold'),
-                                'cancelled' => __('project.status_cancelled'),
+                                'to_do' => __('task.to_do'),
+                                'in_progress' => __('task.in_progress'),
+                                'review' => __('task.review'),
+                                'done' => __('task.done'),
+                                'on_hold' => __('task.on_hole'),
                             ])
                             ->required(),
-
+                            
                         DatePicker::make('due_date')
+                            ->displayFormat('d/mm/Y')
+                            ->native(false)
+                            ->closeOnDateSelection()
                             ->label(__('task.due_date')),
                     ]),
             ]);

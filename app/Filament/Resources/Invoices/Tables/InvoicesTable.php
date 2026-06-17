@@ -46,8 +46,14 @@ class InvoicesTable
                     ->sortable(),
                 TextColumn::make('total')
                     ->label(__('invoice.total'))
+                    ->formatStateUsing(fn ($state) => '$' . number_format($state, 2))
+                    ->sortable(),
+                TextColumn::make('paid_amount')
+                    ->formatStateUsing(fn ($state) => '$' . number_format($state, 2))
+                    ->label(__('invoice.paid_amount'))
                     ->sortable(),
                 TextColumn::make('due_amount')
+                    ->formatStateUsing(fn ($state) => '$' . number_format($state, 2))
                     ->label(__('invoice.due_amount'))
                     ->sortable(),
             ])
