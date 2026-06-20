@@ -2,3 +2,26 @@
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
+
+/* TODO: make component saperate */
+@layer components {
+    .component-card-table .fi-ta-ctn {
+        @apply border-0 bg-transparent shadow-none ring-0;
+    }
+
+    .component-card-table .fi-ta-main {
+        @apply flex flex-col gap-5;
+    }
+
+    .component-card-table .fi-ta-header-ctn {
+        @apply rounded-xl border border-gray-200 bg-white shadow-sm;
+    }
+
+    .component-card-table .fi-ta-content-ctn {
+        @apply border-0 bg-transparent shadow-none ring-0;
+    }
+
+    .component-card-table .fi-pagination {
+        @apply rounded-xl border border-gray-200 bg-white px-5 py-3 shadow-sm;
+    }
+}

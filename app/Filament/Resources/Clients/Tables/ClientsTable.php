@@ -17,29 +17,38 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\QueryBuilder;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class ClientsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
-            ->columns([
-                TextColumn::make('name')
-                    ->label(__('client.name'))
-                    ->sortable(),
-                TextColumn::make('company_name')
-                    ->label(__('client.company_name'))
-                    ->sortable(),
-                TextColumn::make('phone')
-                    ->label(__('client.phone'))
-                    ->sortable(),
-                TextColumn::make('email')
-                    ->label(__('client.email'))
-                    ->sortable(),
-                TextColumn::make('address')
-                    ->label(__('client.address'))
-                    ->sortable(),
-            ])
+                ->extraAttributes(['class' => 'component-card-table'])
+                ->content(view('clients.list-clients'))
+                ->modifyQueryUsing(fn (Builder $query): Builder => $query
+                    ->withCount('projects')
+                    ->withSum('invoices', 'paid_amount')
+                    ->withSum('invoices', 'due_amount'))
+                ->paginationPageOptions([5, 10, 20, 50, 100, 'all'])
+                ->defaultPaginationPageOption(10)
+            // ->columns([
+            //     TextColumn::make('name')
+            //         ->label(__('client.name'))
+            //         ->sortable(),
+            //     TextColumn::make('company_name')
+            //         ->label(__('client.company_name'))
+            //         ->sortable(),
+            //     TextColumn::make('phone')
+            //         ->label(__('client.phone'))
+            //         ->sortable(),
+            //     TextColumn::make('email')
+            //         ->label(__('client.email'))
+            //         ->sortable(),
+            //     TextColumn::make('address')
+            //         ->label(__('client.address'))
+            //         ->sortable(),
+            // ])
             ->filters([
                 SelectFilter::make('name')
                     ->label(__('client.name'))
@@ -68,11 +77,6 @@ class ClientsTable
                 DeleteAction::make(),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                    ForceDeleteBulkAction::make(),
-                    RestoreBulkAction::make(),
-                ]),
             ]);
     }
 }

@@ -11,8 +11,8 @@ use Filament\Actions\Action;
 class ListClients extends ListRecords
 {
     protected static string $resource = ClientResource::class;
-    protected string $view = 'clients.list-clients';
-    public int | string $perPage = 10;
+    // protected string $view = 'clients.list-clients';
+    // public int | string $perPage = 10;
 
     protected function getHeaderActions(): array
     {
@@ -22,16 +22,16 @@ class ListClients extends ListRecords
         ];
     }
 
-    public function getViewData(): array
-    {
-        return [
-            'clients' => Client::query()
-                ->withCount('projects')
-                ->withSum('invoices', 'paid_amount')
-                ->withSum('invoices', 'due_amount')
-                ->paginate($this->perPage),
-        ];
-    }
+    // public function getViewData(): array
+    // {
+    //     return [
+    //         'clients' => Client::query()
+    //             ->withCount('projects')
+    //             ->withSum('invoices', 'paid_amount')
+    //             ->withSum('invoices', 'due_amount')
+    //             ->paginate($this->perPage),
+    //     ];
+    // }
 
     public function deleteAction(): Action
     {

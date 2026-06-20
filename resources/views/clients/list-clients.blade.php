@@ -1,4 +1,7 @@
-<x-filament-panels::page>
+    @php
+        $clients = $records ?? $clients;
+    @endphp
+    
     <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
         @foreach ($clients as $client)
         <div class="rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition overflow-hidden">
@@ -95,11 +98,5 @@
         </div>
         @endforeach
     </div>
-<x-filament::pagination
-    :paginator="$clients"
-    :page-options="[5, 10, 20, 50, 100, 'all']"
-    current-page-option-property="perPage"
-/>
 
 <x-filament-actions::modals />
-</x-filament-panels::page>

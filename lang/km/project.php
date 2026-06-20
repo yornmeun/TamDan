@@ -20,4 +20,6 @@ return [
     'start_date_from' => 'ចាប់ពីថ្ងៃ',
     'start_date_to' => 'ដល់ថ្ងៃ',
     'project_total' => 'គម្រោងទាំងអស់',
+    'tasks' => 'កិច្ចការ',
+    'duration' => 'រយៈពេល',
 ];
