@@ -1,7 +1,7 @@
 <?php
  
 return [
-    'name' => 'ឈ្មោះ',
+    'cancel' => 'បោះបង់',
     'company_name' => 'ឈ្មោះក្រុមហ៊ុន',
     'phone' => 'ទូរស័ព្ទ',
     'email' => 'អ៊ីមែល',

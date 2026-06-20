@@ -41,6 +41,7 @@ class AdminPanelProvider extends PanelProvider
                 // 'primary' => '#0281cc',
 
             ])
+            ->viteTheme(['resources/css/filament/admin/theme.css', 'resources/css/app.css'])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->plugins([
                 FilamentShieldPlugin::make(),
