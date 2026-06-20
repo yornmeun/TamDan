@@ -25,7 +25,8 @@
                 {{ $project->title }}
             </h2>
 
-            <p class="text-gray-500">
+            <p class="text-gray-500 flex gap-1">
+                <x-heroicon-o-user class="h-4 w-4" />
                 {{ $project->client->name }}
             </p>
 
