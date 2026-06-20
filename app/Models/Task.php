@@ -14,6 +14,7 @@ class Task extends Model
         'title',
         'status',
         'due_date',
+        'priority',
     ];
 
     public function project()

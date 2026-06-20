@@ -12,6 +12,9 @@ use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Actions\DeleteAction;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Filters\Filter;
+use Illuminate\Database\Eloquent\Builder;
 
 class TasksTable
 {
@@ -27,26 +30,119 @@ class TasksTable
                     ->label(__('task.project'))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('assignedTo.name')
+                TextColumn::make('assignee.name')
                     ->label(__('task.assigned_to'))
                     ->searchable()
                     ->sortable(),
-                BadgeColumn::make('status')
-                    ->label(__('task.status'))
+                TextColumn::make('priority')
+                    ->label(__('task.priority'))
+                    ->badge()
+                    ->color(fn ($state) => match ($state) {
+                            'low' => 'gray',
+                            'medium' => 'primary',
+                            'high' => 'danger',
+                            default => 'gray',
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'low' => __('task.priority_low'),
+                        'medium' => __('task.priority_medium'),
+                        'high' => __('task.priority_high'),
+                        default => $state,
+                    })
                     ->sortable(),
+                
+                TextColumn::make('status')
+                    ->label(__('task.status'))
+                    ->badge()
+                    ->color(fn ($state) => match ($state) {
+                            'to_do' => 'gray',
+                            'in_progress' => 'primary',
+                            'review' => 'warning',
+                            'done' => 'success',
+                            'on_hold' => 'danger',
+                            default => 'gray',
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'to_do' => __('task.to_do'),
+                        'in_progress' => __('task.in_progress'),
+                        'review' => __('task.review'),
+                        'done' => __('task.done'),
+                        'on_hold' => __('task.on_hole'),
+                        default => $state,
+                    })
+                    ->sortable(),
+                  
                 TextColumn::make('due_date')
                     ->label(__('task.due_date'))
-                    ->date(),
+                    ->date('j-M-Y'),
             ])
             ->filters([
-                SelectFilter::make('status')
+                SelectFilter::make('title')
+                    ->label(__('task.title'))
+                    ->options(fn () => \App\Models\Task::pluck('title', 'title')->toArray())
+                    ->preload()
+                    ->searchable(),
+
+                SelectFilter::make('project_id')
+                    ->label(__('task.project'))
+                    ->relationship('project', 'title')
+                    ->preload()
+                    ->searchable(),
+
+                SelectFilter::make('assigned_to')
+                    ->label(__('task.assigned_to'))
+                    ->relationship('assignee', 'name')
+                    ->preload()
+                    ->searchable(),
+
+                SelectFilter::make('priority')
+                    ->label(__('task.priority'))
                     ->options([
-                        'not_started' => __('project.status_not_started'),
-                        'in_progress' => __('project.status_in_progress'),
-                        'completed' => __('project.status_completed'),
-                        'on_hold' => __('project.status_on_hold'),
-                        'cancelled' => __('project.status_cancelled'),
-                    ]),
+                        'low' => __('task.priority_low'),
+                        'medium' => __('task.priority_medium'),
+                        'high' => __('task.priority_high'),
+                    ])
+                    ->preload(),
+
+                SelectFilter::make('status')
+                    ->label(__('task.status'))
+                    ->options([
+                        'to_do' => __('task.to_do'),
+                        'in_progress' => __('task.in_progress'),
+                        'review' => __('task.review'),
+                        'done' => __('task.done'),
+                        'on_hold' => __('task.on_hold'),
+                    ])
+                    ->preload(),
+
+                Filter::make('due_date')
+                    ->label(__('task.due_date'))
+                    ->form([
+                        DatePicker::make('due_date_from')
+                            ->label(__('task.due_date_from'))
+                            ->displayFormat('d/MM/Y')
+                            ->native(false)
+                            ->closeOnDateSelection(),
+
+                        DatePicker::make('due_date_to')
+                            ->label(__('task.due_date_to'))
+                            ->displayFormat('d/MM/Y')
+                            ->native(false)
+                            ->closeOnDateSelection(),
+                    ])
+                    ->columns(2)
+                    ->columnSpan(2)
+                    ->query(function (Builder $query, array $data) {
+                        $query
+                            ->when(
+                                $data['due_date_from'],
+                                fn (Builder $query, $date) => $query->whereDate('due_date', '>=', $date)
+                            )
+                            ->when(
+                                $data['due_date_to'],
+                                fn (Builder $query, $date) => $query->whereDate('due_date', '<=', $date)
+                            );
+                    }),
             ], layout: FiltersLayout::AboveContent)
             ->recordActions([
                 ViewAction::make(),
