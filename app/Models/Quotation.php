@@ -18,6 +18,8 @@ class Quotation extends Model
         'issued_at',
         'expired_at',
         'user_id',
+        'tax',
+        'discount',
     ];
 
     public function client()
@@ -38,5 +40,10 @@ class Quotation extends Model
     public function quotationItems()
     {
         return $this->hasMany(QuotationItem::class);
+    }
+
+    public function project()
+    {
+        return $this->hasOne(Project::class);
     }
 }

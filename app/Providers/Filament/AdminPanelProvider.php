@@ -37,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->globalSearch(false)
             ->colors([
-                'primary' => Color::Sky,
+                'primary' => Color::Blue,
                 // 'primary' => '#0281cc',
 
             ])
