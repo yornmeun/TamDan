@@ -1,12 +1,47 @@
 <x-filament-panels::page>
-    <div class="w-full max-w-6xl mx-auto bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 20px;
+                background: #ffffff;
+                font-family: 'Battambang', 'Poppins', sans-serif;
+            }
+
+            body * {
+                visibility: hidden;
+            }
+
+            #quotation-print-area,
+            #quotation-print-area * {
+                visibility: visible;
+            }
+
+            #quotation-print-area {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                max-width: none;
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+
+    <div id="quotation-print-area" class="w-full max-w-6xl mx-auto bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
         {{-- Header --}}
         <div class="flex justify-between items-start p-10 border-b border-gray-200">
 
             <div>
                 <div class="flex items-start flex-col gap-3">
                     <div class="flex align-center justify-center gap-2">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-600"></div>
+                        <!-- <div class="w-10 h-10 rounded-xl bg-indigo-600"></div> -->
                         <h2 class="text-2xl font-bold text-gray-900">
                             {{ auth()->user()->company_name ?? auth()->user()->name }}
                         </h2>
