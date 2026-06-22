@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\InvoiceItem;
 
 class Invoice extends Model
 {
@@ -16,10 +17,17 @@ class Invoice extends Model
         'due_amount',
         'status',
         'user_id',
+        'tax',
+        'discount',
     ];
 
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function invoiceItems()
+    {
+        return $this->hasMany(InvoiceItem::class);
     }
 }

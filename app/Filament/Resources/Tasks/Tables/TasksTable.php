@@ -24,15 +24,16 @@ class TasksTable
             ->columns([
                 TextColumn::make('title')
                     ->label(__('task.title'))
-                    ->searchable()
                     ->sortable(),
                 TextColumn::make('project.title')
                     ->label(__('task.project'))
-                    ->searchable()
                     ->sortable(),
-                TextColumn::make('assignee.name')
+                // TextColumn::make('assignee.name')
+                //     ->label(__('task.assigned_to'))
+                //     ->searchable()
+                //     ->sortable(),
+                TextColumn::make('assigned_to_name')
                     ->label(__('task.assigned_to'))
-                    ->searchable()
                     ->sortable(),
                 TextColumn::make('priority')
                     ->label(__('task.priority'))
@@ -89,9 +90,17 @@ class TasksTable
                     ->preload()
                     ->searchable(),
 
-                SelectFilter::make('assigned_to')
+                // SelectFilter::make('assigned_to_name')
+                //     ->label(__('task.assigned_to'))
+                //     ->relationship('assignee', 'name')
+                //     ->preload()
+                //     ->searchable(),
+                SelectFilter::make('assigned_to_name')
                     ->label(__('task.assigned_to'))
-                    ->relationship('assignee', 'name')
+                    ->options(fn () => \App\Models\Task::query()
+                    ->whereNotNull('assigned_to_name')
+                    ->pluck('assigned_to_name', 'assigned_to_name')
+                    ->toArray())
                     ->preload()
                     ->searchable(),
 

@@ -28,11 +28,14 @@ class TaskForm
                             ->preload()
                             ->required(),
 
-                        Select::make('assigned_to')
-                            ->label(__('task.assigned_to'))
-                            ->relationship('assignee', 'name')
-                            ->searchable()
-                            ->preload(),
+                        // Select::make('assigned_to')
+                        //     ->label(__('task.assigned_to'))
+                        //     ->relationship('assignee', 'name')
+                        //     ->searchable()
+                        //     ->preload(),
+                        TextInput::make('assigned_to_name')
+                            ->label(__('task.assigned_to')),
+
                         Select::make('priority')
                             ->label(__('task.priority'))
                             ->searchable()

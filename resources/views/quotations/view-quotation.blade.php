@@ -36,7 +36,7 @@
 
     <div id="quotation-print-area" class="w-full max-w-6xl mx-auto bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
         {{-- Header --}}
-        <div class="flex justify-between items-start p-10 border-b border-gray-200">
+        <div class="bg-gray-100 flex justify-between items-start p-10 border-b border-gray-200">
 
             <div>
                 <div class="flex items-start flex-col gap-3">
