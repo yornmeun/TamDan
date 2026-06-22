@@ -6,6 +6,15 @@
         }
 
         @media print {
+            html,
+            body,
+            #quotation-print-area,
+            #quotation-print-area * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
             body {
                 margin: 0;
                 padding: 20px;
@@ -31,12 +40,20 @@
                 border-radius: 0;
                 box-shadow: none;
             }
+
+            #quotation-print-area .print-document-header {
+                background-color: #f3f4f6 !important;
+            }
+
+            #quotation-print-area .print-table-header {
+                background-color: #f9fafb !important;
+            }
         }
     </style>
 
     <div id="quotation-print-area" class="w-full max-w-6xl mx-auto bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
         {{-- Header --}}
-        <div class="bg-gray-100 flex justify-between items-start p-10 border-b border-gray-200">
+        <div class="print-document-header bg-gray-100 flex justify-between items-start p-10 border-b border-gray-200">
 
             <div>
                 <div class="flex items-start flex-col gap-3">
@@ -127,7 +144,7 @@
 
         {{-- Items --}}
         <table class="w-full">
-            <thead class="bg-gray-50">
+            <thead class="print-table-header bg-gray-50">
             <tr class="text-left">
                 <th class="px-8 py-5 uppercase text-xs text-gray-500">
                     {{ __('quotation.description') }}

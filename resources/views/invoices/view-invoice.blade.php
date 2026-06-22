@@ -6,6 +6,15 @@
         }
 
         @media print {
+            html,
+            body,
+            #invoice-print-area,
+            #invoice-print-area * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
             body {
                 margin: 0;
                 padding: 20px;
@@ -31,13 +40,18 @@
                 border-radius: 0;
                 box-shadow: none;
             }
+
+            #invoice-print-area .print-document-header,
+            #invoice-print-area .print-table-header {
+                background-color: #f3f4f6 !important;
+            }
         }
     </style>
 
     <div id="invoice-print-area" class="w-full max-w-6xl mx-auto bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
 
     {{-- Header --}}
-    <div class="bg-gray-100 px-10 py-8 flex justify-between border-b border-gray-200">
+    <div class="print-document-header bg-gray-100 px-10 py-8 flex justify-between border-b border-gray-200">
 
         {{-- Company --}}
         <div class="flex gap-4">
@@ -97,6 +111,8 @@
             <p class="text-sm text-gray-500">
                 {{ $invoice->project->client->email }}
             </p>
+            <p class="text-sm text-gray-500">{{ $invoice->project->client?->phone }}</p>
+            <p class="text-sm text-gray-500">{{ $invoice->project->client?->address }}</p>
 
         </div>
 
@@ -124,7 +140,7 @@
 
             <thead>
 
-            <tr class="bg-gray-100 text-gray-500 text-xs uppercase">
+            <tr class="print-table-header bg-gray-100 text-gray-500 text-xs uppercase">
 
                 <th class="text-left py-3 px-3">
                     {{ __('invoice.description') }}
