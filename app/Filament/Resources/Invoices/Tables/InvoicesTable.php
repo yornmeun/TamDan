@@ -2,18 +2,19 @@
 
 namespace App\Filament\Resources\Invoices\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
-use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
-use Filament\Actions\DeleteAction;
-use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Filters\SelectFilter;
 use App\Models\Invoice;
 use App\Models\Project;
+use Filament\Actions\Action;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
 
 class InvoicesTable
 {
@@ -58,6 +59,10 @@ class InvoicesTable
                     ->sortable(),
             ])
             ->recordActions([
+                Action::make('downloadPdf')
+                    ->label('PDF')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->url(fn (Invoice $record): string => route('invoices.download-pdf', $record)),
                 ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),

@@ -2,19 +2,21 @@
 
 namespace App\Filament\Resources\Quotations\Tables;
 
+use App\Models\Quotation;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Actions\DeleteAction;
-use Filament\Tables\Filters\TrashedFilter;
-use Filament\Tables\Table;
-use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\TrashedFilter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
 class QuotationsTable
@@ -61,6 +63,10 @@ class QuotationsTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
+                Action::make('downloadPdf')
+                    ->label('PDF')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->url(fn (Quotation $record): string => route('quotations.download-pdf', $record)),
                 ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
