@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use BezhanSalleh\FilamentShield\Facades\FilamentShield;
 use Filament\Resources\Resource;
 use Filament\Pages\BasePage as Page;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
 use Filament\Widgets\Widget;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
@@ -25,7 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-      FilamentShield::buildPermissionKeyUsing(
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::AUTH_LOGIN_FORM_AFTER,
+            fn (): string => view('filament.pages.login')->render(),
+        );
+
+        FilamentShield::buildPermissionKeyUsing(
             function (string $entity, string $affix, string $subject, string $case, string $separator) {
                 return match(true) {
                     # if `configurePermissionIdentifierUsing()` was used previously, then this needs to be adjusted accordingly
