@@ -19,13 +19,7 @@ class SocialiteController extends Controller
     public function callback(string $provider)
     {
         $this->validateProvider($provider);
-        try {
-            $response = Socialite::driver($provider)->user();
-        } catch (\Exception $e) {
-            return redirect('/login')->withErrors([
-                'login' => 'Google login failed. Please try again.',
-            ]);
-        }
+        $response = Socialite::driver($provider)->user();
 
         $user = User::firstWhere(['email' => $response->getEmail()]);
  
