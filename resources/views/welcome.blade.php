@@ -231,16 +231,18 @@
                 <!-- <span class="font-display-lg text-title-md font-extrabold tracking-tight text-on-primary-fixed">TamDan</span> -->
             </div>
             <nav class="hidden md:flex gap-10">
-                <a class="font-body-md text-primary font-bold border-b-2 border-primary pb-1" href="#">Features</a>
-                <a class="font-body-md text-on-surface-variant hover:text-primary transition-colors font-semibold" href="#">Solutions</a>
-                <a class="font-body-md text-on-surface-variant hover:text-primary transition-colors font-semibold" href="#">Pricing</a>
-                <a class="font-body-md text-on-surface-variant hover:text-primary transition-colors font-semibold" href="#">Resources</a>
+                <a class="font-body-md text-primary font-bold border-b-2 border-primary pb-1" href="#features">Features</a>
+                <a class="font-body-md text-on-surface-variant hover:text-primary transition-colors font-semibold" href="#workflow">Workflow</a>
+                <a class="font-body-md text-on-surface-variant hover:text-primary transition-colors font-semibold" href="#pricing">Pricing</a>
+                <a class="font-body-md text-on-surface-variant hover:text-primary transition-colors font-semibold" href="#faq">FAQs</a>
             </nav>
             <div class="flex items-center gap-6">
-                <button class="font-body-md text-on-surface font-bold hover:text-primary transition-all">
-                    <a href="/admin">Login</a>
-                </button>
-                <button class="bg-primary text-on-primary px-7 py-3 rounded-xl font-body-md font-bold hover:bg-primary-container active:scale-95 transition-all shadow-lg shadow-primary/10">Get Started</button>
+                <a class="font-body-md text-on-surface font-bold hover:text-primary transition-all" href="/admin">
+                    Login
+                </a>
+                <a class="bg-primary text-on-primary px-7 py-3 rounded-xl font-body-md font-bold hover:bg-primary-container active:scale-95 transition-all shadow-lg shadow-primary/10" href="/admin/login">
+                    Get Started
+                </a>
             </div>
         </div>
     </header>
@@ -261,23 +263,33 @@
                     TamDan is the operating system for modern service businesses. Streamline the entire client lifecycle from initial lead to final payment in one unified, high-performance platform.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-6 mb-12">
-                    <button class="bg-primary text-on-primary px-10 py-5 rounded-2xl font-body-lg font-bold shadow-2xl shadow-primary/30 hover-lift active:scale-95 text-lg">Start Free Trial</button>
-                    <button class="bg-white/50 backdrop-blur border border-outline-variant text-on-surface px-10 py-5 rounded-2xl font-body-lg font-bold hover:bg-white transition-colors active:scale-95 text-lg">Book a Demo</button>
+                    <a class="bg-primary text-on-primary px-10 py-5 rounded-2xl font-body-lg font-bold shadow-2xl shadow-primary/30 hover-lift active:scale-95 text-lg text-center" href="/admin/login">Get Started</a>
+                    <a class="bg-white/50 backdrop-blur border border-outline-variant text-on-surface px-10 py-5 rounded-2xl font-body-lg font-bold hover:bg-white transition-colors active:scale-95 text-lg text-center" href="/admin">Open Dashboard</a>
                 </div>
                 <div class="flex items-center gap-4">
-                    <div class="flex -space-x-3">
-                        <img alt="User" class="w-10 h-10 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfDfUJFlGJ57Crbzc30Im7GpNxTvFOj0YI2iQJd6uMkqGysW_2m9Ef146oqDN7kv2jVsKwr5zKdK0WInwA5t_dGxqbNs1XKnYsDtShn7IdP6I5JRBAA-o5mvjhhfQLgFnks9QTI90aQwqIM7OjRSNpf2rAWTKVQGORDzPcVwfyGIiMX6YsBtducde8y7dLxEBokQQZMYl1XcQCqs3nzAjUe8IrKqDJUIgYilV5i6352YLIOWZ4dYqEhxTdKNjLtSnPrB0iXm9n3-M" />
-                        <img alt="User" class="w-10 h-10 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZPNTbzhPBuL1jikCFWRyJi4I0UvRUVerGFA4sp2HZNkc1Tz9f56OS5v-0mDpeorSmIGyWvdmX4DpKOC8SwjdDCJg2VWqUkL8bIMb7BukONKfrPLtn_NZZweggHsRFDG8u6mVp87p1qZD477mSrg0U0VoNVnAtZVaPiW7-x4N-dCFybD4Hn4d3rAjf7SrfewZZnv6fRzuuHhn7iODwI0lrq9d2axwqqkejahQ-3nUQ7wOUgEsTND4M5cqEQNR4qf4x7y_BXFCAtgg" />
-                        <img alt="User" class="w-10 h-10 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYYmI0A_vgsPIH1w0vRa7FTB_kZP7DsOGRn_iz977St5U9go1muNjYCg8pYPrZvUhDA5coZOJ62Yvrx8Q4_5ivFWuzE3XRd1zXo847Ksvvmo7tLuT68YiUHRNf_aGSsSSBRKbQQRR4l9nC1oAg-QFGbEGQXgdhtrctGk2T9z9II2UWEHXVVIHw2LD9EzdQYZ7Dkreyfs1U-sQSTk984Qeoi2myaVHgoTZ9_AzaP5hOoJdSaGXO0uqYVSAUVuelnGA481yIeFk9hq8" />
-                    </div>
-                    <p class="font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">Trusted by 18,500+ global agencies</p>
+                    @if ($recentClients->isNotEmpty())
+                        <div class="flex -space-x-3">
+                            @foreach ($recentClients as $client)
+                                <div class="w-10 h-10 rounded-full border-2 border-white bg-primary text-on-primary flex items-center justify-center text-xs font-black uppercase" title="{{ $client->name }}">
+                                    {{ strtoupper(substr($client->name, 0, 1)) }}
+                                </div>
+                            @endforeach
+                        </div>
+                        <p class="font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">
+                            {{ $stats['clients'] }} {{ Str::plural('client', $stats['clients']) }} managed on TamDan
+                        </p>
+                    @else
+                        <p class="font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">
+                            Start managing clients, projects, and invoices today
+                        </p>
+                    @endif
                 </div>
             </div>
             <div class="relative scroll-reveal visible">
                 <div class="absolute inset-0 bg-primary/10 blur-[120px] rounded-full scale-75"></div>
                 <div class="glass-card rounded-[40px] p-8 shadow-[0_32px_80px_rgba(0,0,0,0.08)] border border-white/50 relative z-10 overflow-hidden group">
                     <div class="flex justify-between items-center mb-10">
-                        <div class="font-title-md text-title-md text-on-background">Agency Performance</div>
+                        <div class="font-title-md text-title-md text-on-background">Live Platform Snapshot</div>
                         <div class="flex gap-2.5">
                             <div class="w-3.5 h-3.5 rounded-full bg-red-400/20 border border-red-400/40"></div>
                             <div class="w-3.5 h-3.5 rounded-full bg-amber-400/20 border border-amber-400/40"></div>
@@ -286,30 +298,26 @@
                     </div>
                     <div class="grid grid-cols-2 gap-6 mb-10">
                         <div class="bg-white/40 border border-white/60 rounded-3xl p-6">
-                            <div class="text-on-surface-variant font-label-sm mb-2 uppercase tracking-widest font-bold">Managed Revenue</div>
-                            <div class="text-3xl text-primary font-black">$42,850.00</div>
+                            <div class="text-on-surface-variant font-label-sm mb-2 uppercase tracking-widest font-bold">Collected Revenue</div>
+                            <div class="text-3xl text-primary font-black">{{ $formatted['totalRevenue'] }}</div>
                         </div>
                         <div class="bg-primary/5 border border-primary/10 rounded-3xl p-6">
                             <div class="text-primary/70 font-label-sm mb-2 uppercase tracking-widest font-bold">Projects</div>
-                            <div class="text-3xl text-on-primary-fixed font-black">12 Active</div>
+                            <div class="text-3xl text-on-primary-fixed font-black">{{ $stats['activeProjects'] }} Active</div>
                         </div>
                     </div>
                     <div class="bg-white/50 backdrop-blur-sm rounded-3xl p-6 border border-white/40 h-56 flex items-end gap-3 px-8">
-                        <div class="w-full bg-primary/5 h-24 rounded-2xl relative overflow-hidden group-hover:h-28 transition-all duration-700">
-                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary/80 h-12 rounded-t-xl"></div>
-                        </div>
-                        <div class="w-full bg-primary/5 h-36 rounded-2xl relative overflow-hidden group-hover:h-40 transition-all duration-700">
-                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary/80 h-24 rounded-t-xl"></div>
-                        </div>
-                        <div class="w-full bg-primary/5 h-28 rounded-2xl relative overflow-hidden group-hover:h-32 transition-all duration-700">
-                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary/80 h-16 rounded-t-xl"></div>
-                        </div>
-                        <div class="w-full bg-primary/5 h-44 rounded-2xl relative overflow-hidden group-hover:h-48 transition-all duration-700">
-                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary/80 h-36 rounded-t-xl"></div>
-                        </div>
-                        <div class="w-full bg-primary/5 h-32 rounded-2xl relative overflow-hidden group-hover:h-36 transition-all duration-700">
-                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary/80 h-20 rounded-t-xl"></div>
-                        </div>
+                        @foreach ($monthlyRevenue as $month)
+                            @php
+                                $barHeight = $maxMonthlyRevenue > 0
+                                    ? max(12, (int) round(($month['total'] / $maxMonthlyRevenue) * 144))
+                                    : 12;
+                                $fillHeight = max(8, (int) round($barHeight * 0.65));
+                            @endphp
+                            <div class="w-full bg-primary/5 rounded-2xl relative overflow-hidden group-hover:opacity-90 transition-all duration-700" style="height: {{ $barHeight }}px" title="{{ $month['label'] }}: ${{ number_format($month['total'], 2) }}">
+                                <div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary/80 rounded-t-xl" style="height: {{ $fillHeight }}px"></div>
+                            </div>
+                        @endforeach
                     </div>
                     <!-- Floating Mini Card -->
                     <div class="absolute -bottom-4 -left-4 glass-card-dark rounded-3xl p-6 shadow-2xl z-20 flex items-center gap-5 border-white/10 group-hover:-translate-y-2 transition-transform duration-500">
@@ -318,7 +326,7 @@
                         </div>
                         <div>
                             <div class="font-label-sm text-white/60 uppercase tracking-widest font-bold">Latest Payment</div>
-                            <div class="text-xl text-white font-black">$12,400.00</div>
+                            <div class="text-xl text-white font-black">{{ $formatted['latestPayment'] }}</div>
                         </div>
                     </div>
                 </div>
@@ -328,25 +336,29 @@
         <section class="bg-white border-y border-outline-variant/30 py-20 relative overflow-hidden">
             <div class="max-w-[1440px] mx-auto px-gutter grid grid-cols-2 md:grid-cols-4 gap-stack-lg text-center relative z-10">
                 <div class="scroll-reveal visible">
-                    <div class="text-5xl lg:text-6xl text-primary font-black mb-3">18.5k+</div>
-                    <div class="font-body-md text-on-surface-variant font-bold uppercase tracking-widest text-sm">Active Businesses</div>
+                    <div class="text-5xl lg:text-6xl text-primary font-black mb-3">{{ $stats['users'] }}</div>
+                    <div class="font-body-md text-on-surface-variant font-bold uppercase tracking-widest text-sm">Users</div>
                 </div>
                 <div class="scroll-reveal visible">
-                    <div class="text-5xl lg:text-6xl text-primary font-black mb-3">156k+</div>
-                    <div class="font-body-md text-on-surface-variant font-bold uppercase tracking-widest text-sm">Projects Delivered</div>
+                    <div class="text-5xl lg:text-6xl text-primary font-black mb-3">{{ $formatted['clients'] }}</div>
+                    <div class="font-body-md text-on-surface-variant font-bold uppercase tracking-widest text-sm">Clients</div>
                 </div>
                 <div class="scroll-reveal visible">
-                    <div class="text-5xl lg:text-6xl text-primary font-black mb-3">$42M+</div>
-                    <div class="font-body-md text-on-surface-variant font-bold uppercase tracking-widest text-sm">Revenue Flow</div>
+                    <div class="text-5xl lg:text-6xl text-primary font-black mb-3">{{ $formatted['completedProjects'] }}</div>
+                    <div class="font-body-md text-on-surface-variant font-bold uppercase tracking-widest text-sm">Projects Completed</div>
                 </div>
                 <div class="scroll-reveal visible">
-                    <div class="text-5xl lg:text-6xl text-primary font-black mb-3">99.9%</div>
-                    <div class="font-body-md text-on-surface-variant font-bold uppercase tracking-widest text-sm">Global Uptime</div>
+                    <div class="text-5xl lg:text-6xl text-primary font-black mb-3">{{ $formatted['totalRevenueCompact'] }}</div>
+                    <div class="font-body-md text-on-surface-variant font-bold uppercase tracking-widest text-sm">Revenue Collected</div>
                 </div>
+                <!-- <div class="scroll-reveal visible">
+                    <div class="text-5xl lg:text-6xl text-primary font-black mb-3">{{ $formatted['quotations'] }}</div>
+                    <div class="font-body-md text-on-surface-variant font-bold uppercase tracking-widest text-sm">Quotations Sent</div>
+                </div> -->
             </div>
         </section>
         <!-- 4. Workflow Section -->
-        <section class="max-w-[1440px] mx-auto px-gutter py-section-gap-lg">
+        <section id="workflow" class="max-w-[1440px] mx-auto px-gutter py-section-gap-lg">
             <div class="text-center mb-24 scroll-reveal visible">
                 <h2 class="font-headline-lg text-headline-lg text-on-background mb-6">The TamDan Lifecycle</h2>
                 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">Experience a seamless, high-fidelity flow from lead acquisition to project completion.</p>
@@ -424,7 +436,7 @@
             </div>
         </section>
         <!-- 5. Features Section -->
-        <section class="bg-[#001a41] py-section-gap-lg text-white relative overflow-hidden">
+        <section id="features" class="bg-[#001a41] py-section-gap-lg text-white relative overflow-hidden">
             <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 blur-[150px] abstract-blob"></div>
             <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-tertiary/10 blur-[100px] abstract-blob"></div>
             <div class="max-w-[1440px] mx-auto px-gutter relative z-10">
@@ -433,59 +445,23 @@
                         <h2 class="font-headline-lg text-headline-lg mb-6 leading-tight">Core Platform Capabilities</h2>
                         <p class="font-body-lg text-body-lg text-white/70">Precision-engineered tools designed for the world's highest growth service agencies.</p>
                     </div>
-                    <button class="mt-8 md:mt-0 font-body-md font-bold text-primary hover:text-white transition-colors flex items-center gap-2 group">
-                        Explore all features <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                    </button>
+                    <a class="mt-8 md:mt-0 font-body-md font-bold text-primary hover:text-white transition-colors flex items-center gap-2 group" href="/admin">
+                        Open admin dashboard <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </a>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Feature Card 1 -->
-                    <div class="glass-card-dark p-10 rounded-[32px] hover-lift glow-border group scroll-reveal visible">
-                        <div class="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                            <span class="material-symbols-outlined text-3xl">groups</span>
+                    @foreach ($features as $feature)
+                        <div class="glass-card-dark p-10 rounded-[32px] hover-lift glow-border group scroll-reveal visible">
+                            <div class="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                                <span class="material-symbols-outlined text-3xl">{{ $feature['icon'] }}</span>
+                            </div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white/80 font-label-sm uppercase tracking-widest mb-4">
+                                {{ number_format($feature['count']) }} {{ $feature['countLabel'] }}
+                            </div>
+                            <h3 class="font-title-md text-title-md mb-4 text-white">{{ $feature['title'] }}</h3>
+                            <p class="font-body-md text-white/60 leading-relaxed">{{ $feature['description'] }}</p>
                         </div>
-                        <h3 class="font-title-md text-title-md mb-4 text-white">Client Management</h3>
-                        <p class="font-body-md text-white/60 leading-relaxed">A centralized CRM built for high-touch service providers. Track interaction history, key documents, and growth milestones effortlessly.</p>
-                    </div>
-                    <!-- Feature Card 2 -->
-                    <div class="glass-card-dark p-10 rounded-[32px] hover-lift glow-border group scroll-reveal visible">
-                        <div class="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                            <span class="material-symbols-outlined text-3xl">view_kanban</span>
-                        </div>
-                        <h3 class="font-title-md text-title-md mb-4 text-white">Task Intelligence</h3>
-                        <p class="font-body-md text-white/60 leading-relaxed">Break down complex projects into precise execution steps. Switch between Kanban, Gantt, or Timeline views with a single click.</p>
-                    </div>
-                    <!-- Feature Card 3 -->
-                    <div class="glass-card-dark p-10 rounded-[32px] hover-lift glow-border group scroll-reveal visible">
-                        <div class="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                            <span class="material-symbols-outlined text-3xl">description</span>
-                        </div>
-                        <h3 class="font-title-md text-title-md mb-4 text-white">Quotation Engine</h3>
-                        <p class="font-body-md text-white/60 leading-relaxed">Visual builder for complex service models and retainers. Generate stunning proposals that get signed in minutes, not days.</p>
-                    </div>
-                    <!-- Feature Card 4 -->
-                    <div class="glass-card-dark p-10 rounded-[32px] hover-lift glow-border group scroll-reveal visible">
-                        <div class="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                            <span class="material-symbols-outlined text-3xl">credit_card</span>
-                        </div>
-                        <h3 class="font-title-md text-title-md mb-4 text-white">Smart Invoicing</h3>
-                        <p class="font-body-md text-white/60 leading-relaxed">Automated milestone billing and recurring retainers. Full integration with global payment gateways for friction-less collections.</p>
-                    </div>
-                    <!-- Feature Card 5 -->
-                    <div class="glass-card-dark p-10 rounded-[32px] hover-lift glow-border group scroll-reveal visible">
-                        <div class="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                            <span class="material-symbols-outlined text-3xl">payments</span>
-                        </div>
-                        <h3 class="font-title-md text-title-md mb-4 text-white">Revenue Tracking</h3>
-                        <p class="font-body-md text-white/60 leading-relaxed">Unified dashboard for bank transfers and credit cards. Handle partial payments and deposits with enterprise-grade precision.</p>
-                    </div>
-                    <!-- Feature Card 6 -->
-                    <div class="glass-card-dark p-10 rounded-[32px] hover-lift glow-border group scroll-reveal visible">
-                        <div class="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                            <span class="material-symbols-outlined text-3xl">bar_chart</span>
-                        </div>
-                        <h3 class="font-title-md text-title-md mb-4 text-white">Profit Analytics</h3>
-                        <p class="font-body-md text-white/60 leading-relaxed">Deep insights into project profitability and team utilization. Data-driven growth reports ready for your next board meeting.</p>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -558,53 +534,76 @@
             </div>
         </section>
         <!-- 7. Pricing Section -->
-        <section class="max-w-[1440px] mx-auto px-gutter py-section-gap-lg">
+        <section id="pricing" class="max-w-[1440px] mx-auto px-gutter py-section-gap-lg">
             <div class="text-center mb-24 scroll-reveal visible">
                 <h2 class="font-headline-lg text-headline-lg text-on-background mb-6">Scalable Plans for Every Stage</h2>
-                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Complete transparency for agencies with ambition.</p>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    Choose a plan based on how many clients, projects, and invoices you need to manage in TamDan.
+                </p>
             </div>
             <div class="grid md:grid-cols-3 gap-8 items-stretch">
-                <!-- Starter -->
-                <div class="bg-white border border-outline-variant/30 p-12 rounded-[40px] hover-lift scroll-reveal shadow-sm flex flex-col visible">
-                    <div class="font-title-md text-title-md mb-4 font-black">Starter</div>
-                    <div class="text-5xl font-black mb-10">$49<span class="text-body-lg font-bold text-on-surface-variant/60 ml-2">/mo</span></div>
-                    <ul class="space-y-6 mb-12 flex-grow">
-                        <li class="flex items-center gap-4 font-semibold text-on-surface-variant"><span class="material-symbols-outlined text-primary bg-primary/5 p-1 rounded-lg">check_circle</span> Up to 5 users</li>
-                        <li class="flex items-center gap-4 font-semibold text-on-surface-variant"><span class="material-symbols-outlined text-primary bg-primary/5 p-1 rounded-lg">check_circle</span> 10 active projects</li>
-                        <li class="flex items-center gap-4 font-semibold text-on-surface-variant"><span class="material-symbols-outlined text-primary bg-primary/5 p-1 rounded-lg">check_circle</span> Standard reporting</li>
-                        <li class="flex items-center gap-4 font-semibold text-on-surface-variant/30"><span class="material-symbols-outlined">cancel</span> Advanced automation</li>
-                    </ul>
-                    <button class="w-full py-5 border border-outline-variant font-black rounded-2xl hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">Choose Starter</button>
-                </div>
-                <!-- Professional -->
-                <div class="bg-on-primary-fixed text-on-primary border-[1.5px] border-primary p-12 rounded-[40px] shadow-[0_40px_80px_rgba(0,89,187,0.15)] relative scroll-reveal lg:scale-105 z-10 flex flex-col visible">
-                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-6 py-2 rounded-full text-label-sm font-black tracking-widest uppercase shadow-xl">Most Popular</div>
-                    <div class="font-title-md text-title-md mb-4 font-black">Professional</div>
-                    <div class="text-5xl font-black mb-10">$99<span class="text-body-lg font-bold opacity-50 ml-2">/mo</span></div>
-                    <ul class="space-y-6 mb-12 flex-grow">
-                        <li class="flex items-center gap-4 font-semibold"><span class="material-symbols-outlined text-primary-fixed-dim bg-white/10 p-1 rounded-lg">check_circle</span> Unlimited users</li>
-                        <li class="flex items-center gap-4 font-semibold"><span class="material-symbols-outlined text-primary-fixed-dim bg-white/10 p-1 rounded-lg">check_circle</span> Unlimited projects</li>
-                        <li class="flex items-center gap-4 font-semibold"><span class="material-symbols-outlined text-primary-fixed-dim bg-white/10 p-1 rounded-lg">check_circle</span> Advanced automation</li>
-                        <li class="flex items-center gap-4 font-semibold"><span class="material-symbols-outlined text-primary-fixed-dim bg-white/10 p-1 rounded-lg">check_circle</span> Financial analytics</li>
-                    </ul>
-                    <button class="w-full py-5 bg-primary text-on-primary rounded-2xl font-black shadow-2xl shadow-primary/30 hover:scale-[1.02] active:scale-95 transition-all text-lg">Go Professional</button>
-                </div>
-                <!-- Enterprise -->
-                <div class="bg-white border border-outline-variant/30 p-12 rounded-[40px] hover-lift scroll-reveal shadow-sm flex flex-col visible">
-                    <div class="font-title-md text-title-md mb-4 font-black">Enterprise</div>
-                    <div class="text-5xl font-black mb-10">$299<span class="text-body-lg font-bold text-on-surface-variant/60 ml-2">/mo</span></div>
-                    <ul class="space-y-6 mb-12 flex-grow">
-                        <li class="flex items-center gap-4 font-semibold text-on-surface-variant"><span class="material-symbols-outlined text-primary bg-primary/5 p-1 rounded-lg">check_circle</span> White-labeling</li>
-                        <li class="flex items-center gap-4 font-semibold text-on-surface-variant"><span class="material-symbols-outlined text-primary bg-primary/5 p-1 rounded-lg">check_circle</span> Priority API access</li>
-                        <li class="flex items-center gap-4 font-semibold text-on-surface-variant"><span class="material-symbols-outlined text-primary bg-primary/5 p-1 rounded-lg">check_circle</span> Dedicated manager</li>
-                        <li class="flex items-center gap-4 font-semibold text-on-surface-variant"><span class="material-symbols-outlined text-primary bg-primary/5 p-1 rounded-lg">check_circle</span> Custom integrations</li>
-                    </ul>
-                    <button class="w-full py-5 border border-outline-variant font-black rounded-2xl hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">Contact Sales</button>
-                </div>
+                @foreach ($plans as $plan)
+                    <div @class([
+                        'p-12 rounded-[40px] hover-lift scroll-reveal shadow-sm flex flex-col visible relative',
+                        'bg-on-primary-fixed text-on-primary border-[1.5px] border-primary shadow-[0_40px_80px_rgba(0,89,187,0.15)] lg:scale-105 z-10' => $plan['featured'],
+                        'bg-white border border-outline-variant/30' => ! $plan['featured'],
+                    ])>
+                        @if ($plan['featured'] && ! empty($plan['badge']))
+                            <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-6 py-2 rounded-full text-label-sm font-black tracking-widest uppercase shadow-xl">
+                                {{ $plan['badge'] }}
+                            </div>
+                        @endif
+
+                        <div class="font-title-md text-title-md mb-2 font-black">{{ $plan['name'] }}</div>
+                        <p @class([
+                            'font-body-md text-sm mb-6',
+                            'opacity-70' => $plan['featured'],
+                            'text-on-surface-variant' => ! $plan['featured'],
+                        ])>{{ $plan['summary'] }}</p>
+
+                        <div class="text-5xl font-black mb-10">
+                            {{ $plan['price_label'] }}<span @class([
+                                'text-body-lg font-bold ml-2',
+                                'opacity-50' => $plan['featured'],
+                                'text-on-surface-variant/60' => ! $plan['featured'],
+                            ])>{{ $plan['period'] }}</span>
+                        </div>
+
+                        <ul class="space-y-6 mb-12 flex-grow">
+                            @foreach ($plan['included'] as $feature)
+                                <li @class([
+                                    'flex items-center gap-4 font-semibold',
+                                    'text-on-surface-variant' => ! $plan['featured'],
+                                ])>
+                                    <span @class([
+                                        'material-symbols-outlined p-1 rounded-lg shrink-0',
+                                        'text-primary-fixed-dim bg-white/10' => $plan['featured'],
+                                        'text-primary bg-primary/5' => ! $plan['featured'],
+                                    ])>check_circle</span>
+                                    {{ $feature }}
+                                </li>
+                            @endforeach
+                            @foreach ($plan['excluded'] as $feature)
+                                <li class="flex items-center gap-4 font-semibold text-on-surface-variant/30">
+                                    <span class="material-symbols-outlined shrink-0">cancel</span>
+                                    {{ $feature }}
+                                </li>
+                            @endforeach
+                        </ul>
+
+                        <a @class([
+                            'w-full py-5 rounded-2xl font-black text-center transition-all duration-300 block',
+                            'bg-primary text-on-primary shadow-2xl shadow-primary/30 hover:scale-[1.02] active:scale-95 text-lg' => $plan['featured'],
+                            'border border-outline-variant hover:bg-primary hover:text-white hover:border-primary' => ! $plan['featured'],
+                        ]) href="/admin/login">
+                            {{ $plan['cta'] }}
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </section>
         <!-- 8. FAQ Section -->
-        <section class="max-w-4xl mx-auto px-gutter py-section-gap-md scroll-reveal visible">
+        <section id="faq" class="max-w-4xl mx-auto px-gutter py-section-gap-md scroll-reveal visible">
             <h2 class="font-headline-lg text-headline-lg text-center mb-20">Platform FAQs</h2>
             <div class="space-y-6">
                 <details class="group bg-white border border-outline-variant/30 rounded-3xl overflow-hidden shadow-sm transition-all duration-300 open:shadow-md" open="">
@@ -613,25 +612,25 @@
                         <span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary font-black">expand_more</span>
                     </summary>
                     <div class="p-8 pt-0 text-on-surface-variant font-body-md leading-relaxed">
-                        Yes, TamDan offers a 14-day fully featured free trial. No credit card is required. You'll have full access to Professional features to see how it fits your workflow.
+                        Sign in at the TamDan admin panel to manage clients, projects, quotations, invoices, and tasks from one dashboard. Contact your administrator if you need an account.
                     </div>
                 </details>
                 <details class="group bg-white border border-outline-variant/30 rounded-3xl overflow-hidden shadow-sm transition-all duration-300 open:shadow-md">
                     <summary class="flex justify-between items-center p-8 cursor-pointer font-title-md font-black list-none hover:bg-surface-container transition-all">
-                        Can I migrate my data from other CRM tools?
+                        What can I manage inside TamDan?
                         <span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary font-black">expand_more</span>
                     </summary>
                     <div class="p-8 pt-0 text-on-surface-variant font-body-md leading-relaxed">
-                        Absolutely. We provide seamless migration tools for most popular project management and CRM platforms. Our team can also assist with custom data imports for enterprise accounts.
+                        TamDan covers the full service workflow: clients, quotations, projects, tasks, invoices, and payment tracking. Each module is available in the admin panel with role-based access control.
                     </div>
                 </details>
                 <details class="group bg-white border border-outline-variant/30 rounded-3xl overflow-hidden shadow-sm transition-all duration-300 open:shadow-md">
                     <summary class="flex justify-between items-center p-8 cursor-pointer font-title-md font-black list-none hover:bg-surface-container transition-all">
-                        How secure is my agency's data?
+                        How do I get started?
                         <span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary font-black">expand_more</span>
                     </summary>
                     <div class="p-8 pt-0 text-on-surface-variant font-body-md leading-relaxed">
-                        TamDan uses enterprise-grade AES-256 encryption for data at rest and TLS 1.3 for data in transit. We are fully SOC2 Type II compliant and perform quarterly security audits.
+                        Click Get Started to sign in at <a class="text-primary font-semibold hover:underline" href="/admin/login">/admin/login</a>. Add your first client, create a quotation, convert it to a project, and invoice when work is complete.
                     </div>
                 </details>
             </div>
@@ -646,8 +645,8 @@
                     <h2 class="font-display-lg text-[48px] lg:text-[72px] leading-tight mb-10 max-w-4xl mx-auto">Empower Your Agency Performance Today</h2>
                     <p class="font-body-lg text-xl max-w-2xl mx-auto mb-16 opacity-70 leading-relaxed font-medium">Join thousands of professional service providers that trust TamDan to run their business operations every single day.</p>
                     <div class="flex flex-col sm:flex-row gap-8 justify-center items-center">
-                        <button class="bg-white text-primary px-12 py-6 rounded-2xl font-black text-xl shadow-2xl shadow-white/5 hover-lift">Get Started Free</button>
-                        <button class="border border-white/20 text-white px-12 py-6 rounded-2xl font-black text-xl hover:bg-white/10 transition-all backdrop-blur">Contact Our Experts</button>
+                        <a class="bg-white text-primary px-12 py-6 rounded-2xl font-black text-xl shadow-2xl shadow-white/5 hover-lift" href="/admin/login">Get Started Free</a>
+                        <a class="border border-white/20 text-white px-12 py-6 rounded-2xl font-black text-xl hover:bg-white/10 transition-all backdrop-blur" href="/admin">Sign In</a>
                     </div>
                 </div>
             </div>
@@ -658,7 +657,7 @@
         <div class="max-w-[1440px] mx-auto px-gutter grid grid-cols-2 md:grid-cols-4 gap-y-16 lg:gap-x-12 mb-24">
             <div class="col-span-2 md:col-span-1">
                 <div class="flex items-center gap-3 mb-8">
-                    <img alt="TamDan Logo" class="h-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAr5THUEh2R92P56uWAdl6DryvvZMYTAEJBhZEGd-pz_5Z656So26HhxomKDwMd7C9tuCyETgiUiYLPDrdMIaRMcR9-S868U96glZMhDKnAoM4vjKY0ScbCUzJwYtHPr3ZxMknI14rCA13nKMVMf8TDGhSo8BuptCPDaeoKKLWY3c2kNYmBHjxOkLMR4BM9eg5CAhWAEMxxh7t-4wqc4sNyhkGcKVepr-2Ezwk6nv8N44aEnQh5oawPkVOE4GapD2Nd3kqBy65CEE" />
+                    <img alt="TamDan Logo" class="h-10" src="{{ asset('images/tam_dan_logo.png') }}" />
                     <span class="font-display-lg text-title-md font-black tracking-tight text-on-primary-fixed">TamDan</span>
                 </div>
                 <p class="font-body-md text-on-surface-variant max-w-xs mb-8 leading-relaxed font-medium">The world-class platform for modern service providers. Scale your agency faster with TamDan.</p>
@@ -684,26 +683,26 @@
                 </ul>
             </div>
             <div>
-                <h4 class="font-label-sm font-black text-on-surface uppercase mb-8 tracking-[0.2em] text-xs">Company</h4>
+                <!-- <h4 class="font-label-sm font-black text-on-surface uppercase mb-8 tracking-[0.2em] text-xs">Company</h4>
                 <ul class="space-y-5">
                     <li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all font-semibold" href="#">About Us</a></li>
                     <li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all font-semibold" href="#">Careers</a></li>
                     <li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all font-semibold" href="#">Blog</a></li>
                     <li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all font-semibold" href="#">Partners</a></li>
-                </ul>
+                </ul> -->
             </div>
             <div>
-                <h4 class="font-label-sm font-black text-on-surface uppercase mb-8 tracking-[0.2em] text-xs">Support</h4>
+                <!-- <h4 class="font-label-sm font-black text-on-surface uppercase mb-8 tracking-[0.2em] text-xs">Support</h4>
                 <ul class="space-y-5">
                     <li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all font-semibold" href="#">Help Center</a></li>
                     <li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all font-semibold" href="#">API Docs</a></li>
                     <li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all font-semibold" href="#">Status</a></li>
                     <li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all font-semibold" href="#">Contact Us</a></li>
-                </ul>
+                </ul> -->
             </div>
         </div>
         <div class="max-w-[1440px] mx-auto px-gutter pt-12 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-6">
-            <span class="font-body-md text-on-surface-variant/60 font-semibold">© 2024 TamDan Platform Inc. All rights reserved.</span>
+            <span class="font-body-md text-on-surface-variant/60 font-semibold">&copy; {{ date('Y') }} TamDan. All rights reserved.</span>
             <div class="flex gap-10">
                 <a class="font-body-md text-on-surface-variant/60 hover:text-primary font-semibold" href="#">Terms of Service</a>
                 <a class="font-body-md text-on-surface-variant/60 hover:text-primary font-semibold" href="#">Privacy Policy</a>
