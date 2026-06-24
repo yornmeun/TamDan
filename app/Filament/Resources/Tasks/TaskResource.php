@@ -22,11 +22,13 @@ class TaskResource extends Resource
 {
     protected static ?string $model = Task::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
 
     protected static bool $shouldRegisterNavigation = true;
 
     protected static ?string $recordTitleAttribute = 'title';
+
+    protected static ?int $navigationSort = 5;
 
     public static function getModelLabel(): string
     {

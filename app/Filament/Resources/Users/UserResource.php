@@ -22,6 +22,8 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'admin';
 
+    protected static ?int $navigationSort = 6;
+
     public static function getModelLabel(): string
     {
         return __('user.user');

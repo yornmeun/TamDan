@@ -36,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ->font('Battambang')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(\App\Filament\Pages\Login::class)
-            ->registrationRouteSlug('register')
+            ->registration()
             ->profile(isSimple: false)
             ->globalSearch(false)
             ->colors([

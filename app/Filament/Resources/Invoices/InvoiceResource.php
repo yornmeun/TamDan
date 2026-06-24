@@ -27,6 +27,9 @@ class InvoiceResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'invoice_number';
 
+    protected static ?int $navigationSort = 4;
+
+
     #[Override]
     public static function getModelLabel(): string
     {

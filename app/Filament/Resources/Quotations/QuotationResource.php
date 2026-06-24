@@ -26,6 +26,8 @@ class QuotationResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'quote_number';
 
+    protected static ?int $navigationSort = 3;
+
     public static function getModelLabel(): string
     {
         return __('quotation.quotation');
