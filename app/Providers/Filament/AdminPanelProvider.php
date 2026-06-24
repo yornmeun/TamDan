@@ -37,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(\App\Filament\Pages\Login::class)
             ->registration()
-            ->profile(isSimple: false)
+            ->profile(\App\Filament\Pages\EditProfile::class)
             ->globalSearch(false)
             ->colors([
                 'primary' => Color::Blue,
