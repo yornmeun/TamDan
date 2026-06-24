@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class SocialiteController extends Controller
 {
@@ -30,7 +32,7 @@ class SocialiteController extends Controller
                 $provider . '_id' => $response->getId(),
                 'name'            => $response->getName(),
                 'email'           => $response->getEmail(),
-                'password'        => null,
+                'password' => Hash::make(Str::random(16)),
             ]);
         }
  
