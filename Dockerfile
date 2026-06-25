@@ -20,17 +20,16 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copy composer files
-COPY composer.json composer.lock ./
-RUN ls -R /var/www/html/app/Helpers
+# Copy FULL project FIRST (important fix)
+COPY . .
+
+# Debug (optional - you can remove later)
+RUN ls -R app/Helpers || true
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Copy project
-COPY . .
-
-# Laravel optimization
+# Laravel optimization (safe)
 RUN php artisan config:clear || true
 RUN php artisan route:clear || true
 RUN php artisan view:clear || true
