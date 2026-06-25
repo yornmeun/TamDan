@@ -1,43 +1,48 @@
-FROM php:8.3-cli
+# ---------------------------
+# 1. PHP + Composer stage
+# ---------------------------
+FROM php:8.3-cli AS php
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    zip \
-    curl \
-    libpq-dev \
-    libzip-dev \
-    libicu-dev \
-    && docker-php-ext-install \
-        pdo \
-        pdo_pgsql \
-        zip \
-        intl
+    git unzip zip curl \
+    libpq-dev libzip-dev libicu-dev \
+    && docker-php-ext-install pdo pdo_pgsql zip intl
 
-# Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copy FULL project FIRST (important fix)
 COPY . .
 
-# Debug (optional - you can remove later)
-RUN ls -R app/Helpers || true
-
-# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Laravel optimization (safe)
-RUN php artisan config:clear || true
-RUN php artisan route:clear || true
-RUN php artisan view:clear || true
-RUN php artisan event:clear || true
 
-# Node dependencies + build Vite
+# ---------------------------
+# 2. Node build stage
+# ---------------------------
+FROM node:20 AS node
+
+WORKDIR /app
+
+COPY . .
+
 RUN npm install
 RUN npm run build
+
+
+# ---------------------------
+# 3. Final runtime image
+# ---------------------------
+FROM php:8.3-cli
+
+RUN apt-get update && apt-get install -y \
+    libpq-dev libzip-dev libicu-dev \
+    && docker-php-ext-install pdo pdo_pgsql zip intl
+
+COPY --from=php /var/www/html /var/www/html
+COPY --from=node /app/public/build /var/www/html/public/build
+
+WORKDIR /var/www/html
 
 EXPOSE 10000
 
