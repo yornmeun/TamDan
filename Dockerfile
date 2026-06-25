@@ -20,13 +20,17 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # ---------------------------
 # 2. Node build stage
 # ---------------------------
-COPY package*.json ./
+FROM node:20 AS node
 
+WORKDIR /app
+
+COPY package*.json ./
 RUN npm install --legacy-peer-deps
 
 COPY . .
 
 RUN npm run build
+RUN ls -R public
 
 
 # ---------------------------
