@@ -36,6 +36,10 @@ RUN php artisan view:clear || true
 RUN php artisan event:clear || true
 
 # Node dependencies + build Vite
+FROM node:20 AS node
+
+WORKDIR /app
+
 COPY package*.json ./
 
 RUN npm install --legacy-peer-deps
