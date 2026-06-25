@@ -1,38 +1,33 @@
-FROM php:8.3-cli
+FROM php:8.2-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    zip \
-    curl \
-    libpq-dev \
-    libzip-dev \
-    libicu-dev \
-    && docker-php-ext-install \
-        pdo \
-        pdo_pgsql \
-        zip \
-        intl
+    git curl unzip libpq-dev \
+    ca-certificates gnupg
+
+# Install Node.js + npm
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo pdo_pgsql
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copy FULL project FIRST (important fix)
 COPY . .
 
-# Debug (optional - you can remove later)
-RUN ls -R app/Helpers || true
+# PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
-
+# Node dependencies + build Vite
 RUN npm install
 RUN npm run build
 
-# Laravel optimization (safe)
+RUN chmod -R 775 storage bootstrap/cache
+
 RUN php artisan config:clear || true
 RUN php artisan route:clear || true
 RUN php artisan view:clear || true
@@ -40,4 +35,4 @@ RUN php artisan event:clear || true
 
 EXPOSE 10000
 
-CMD php artisan serve --host=0.0.0.0 --port=$PORT
+CMD php artisan migrate --force && php artisan serve --host 0.0.0.0 --port 10000
