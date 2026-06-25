@@ -29,6 +29,9 @@ RUN ls -R app/Helpers || true
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+RUN npm install
+RUN npm run build
+
 # Laravel optimization (safe)
 RUN php artisan config:clear || true
 RUN php artisan route:clear || true
