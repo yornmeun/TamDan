@@ -20,7 +20,7 @@ WORKDIR /var/www/html
 COPY . .
 
 # PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-interaction --no-dev --prefer-dist --optimize-autoloader
 
 # Node dependencies + build Vite
 RUN npm install
