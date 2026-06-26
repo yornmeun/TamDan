@@ -29,11 +29,20 @@ RUN ls -R app/Helpers || true
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+COPY . .
+
+RUN composer install --no-dev --optimize-autoloader
+
+RUN npm install
+
+RUN npm run build
+
 # Laravel optimization (safe)
 RUN php artisan config:clear || true
 RUN php artisan route:clear || true
 RUN php artisan view:clear || true
 RUN php artisan event:clear || true
+
 
 
 EXPOSE 10000
