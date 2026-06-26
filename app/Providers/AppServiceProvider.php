@@ -11,6 +11,7 @@ use Filament\View\PanelsRenderHook;
 use Filament\Widgets\Widget;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+         if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
+        
         FilamentView::registerRenderHook(
             PanelsRenderHook::AUTH_LOGIN_FORM_AFTER,
             fn (): string => view('filament.pages.login')->render(),
