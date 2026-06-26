@@ -34,7 +34,7 @@ RUN ls -R app/Helpers || true
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 RUN npm run build
 
