@@ -202,5 +202,6 @@ return [
          */
 
         'store' => 'default',
+        'enabled' => false,
     ],
 ];
