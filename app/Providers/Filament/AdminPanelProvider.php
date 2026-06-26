@@ -39,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->profile(\App\Filament\Pages\EditProfile::class)
             ->globalSearch(false)
+            ->authGuard('web')
             ->colors([
                 'primary' => Color::Blue,
                 // 'primary' => '#0281cc',
@@ -49,7 +50,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentShieldPlugin::make(),
                 FilamentLogViewer::make()
-                    ->authorize(fn () => auth()->check() && auth()->user()->hasRole('super_admin')),
+                    ->authorize(fn () => auth()->user()->hasRole('super_admin')),
             ])
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
