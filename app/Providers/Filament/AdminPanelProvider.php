@@ -39,7 +39,6 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->profile(\App\Filament\Pages\EditProfile::class)
             ->globalSearch(false)
-            ->authGuard('web')
             ->colors([
                 'primary' => Color::Blue,
                 // 'primary' => '#0281cc',
